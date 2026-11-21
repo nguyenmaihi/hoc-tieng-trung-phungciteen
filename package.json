@@ -1,0 +1,11 @@
+{
+  "name": "khoa-hoc-tieng-trung-phungciteen",
+  "version": "1.0.0",
+  "description": "Landing page Khóa học tiếng Trung giao tiếp thực chiến - anh Phungciteen",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": [],
+  "author": "Minh Phụng",
+  "license": "ISC"
+}

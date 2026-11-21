@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Học tiếng Trung cùng anh Phungciteen</title>
+  <meta name="description" content="Khóa học tiếng Trung giao tiếp thực chiến cùng anh Phungciteen. Bỏ hết sách vở, cày đề, chép từ vựng lan man.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            cream: {
+              50: '#FDFBF7',
+              100: '#FAF8F5',
+              200: '#F5EFE6',
+            },
+            brand: {
+              blue: '#0284C7',
+              blueBg: '#F0F7FF',
+              blueBorder: '#E0F2FE',
+              orange: '#EA580C',
+              orangeBg: '#FFFDF5',
+              orangeBorder: '#F59E0B',
+              green: '#10B981',
+              priceGreen: '#059669',
+              redStrike: '#DC2626'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #FAF8F5;
+      color: #111827;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* Responsive Video Aspect Ratios */
+    .video-container-shorts {
+      position: relative;
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto;
+      aspect-ratio: 9 / 16;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      background-color: #000;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .video-container-16-9 {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 1.25rem;
+      overflow: hidden;
+      background-color: #000;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    .video-iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Custom Toast Notification */
+    #toast {
+      visibility: hidden;
+      min-width: 250px;
+      background-color: #1F2937;
+      color: #fff;
+      text-align: center;
+      border-radius: 9999px;
+      padding: 12px 24px;
+      position: fixed;
+      z-index: 100;
+      left: 50%;
+      bottom: 90px;
+      transform: translateX(-50%);
+      font-size: 14px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+    #toast.show {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#FAF8F5] antialiased selection:bg-blue-100 selection:text-blue-900">
+
+  <!-- Mobile Top Bar Simulation (Header) -->
+  <header class="sticky top-0 z-30 bg-[#FAF8F5]/90 backdrop-blur-md border-b border-black/5 py-3 px-4">
+    <div class="max-w-md md:max-w-xl mx-auto flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <h1 class="text-sm font-bold tracking-tight text-gray-800">Học tiếng Trung cùng anh Phungciteen</h1>
+      </div>
+      <a href="#dangky" class="text-xs font-semibold bg-gray-900 text-white px-3 py-1.5 rounded-full hover:bg-gray-800 transition">
+        Học phí 1490K
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-md md:max-w-xl mx-auto px-4 py-8 pb-32 space-y-12 sm:space-y-14">
+
+    <!-- ==================== SECTION 1: HERO ==================== -->
+    <section class="text-center space-y-4">
+      <p class="text-gray-900 font-bold text-xl sm:text-2xl">Bỏ hết</p>
+      
+      <h2 class="text-black font-extrabold text-2xl sm:text-3xl tracking-tight uppercase leading-tight px-2">
+        SÁCH VỞ, CÀY ĐỀ, CHÉP TỪ VỰNG LAN MAN
+      </h2>
+
+      <!-- Hero Video Player -->
+      <div class="pt-2">
+        <div id="video-hero" class="video-container-shorts" data-video-key="hero">
+          <!-- Sẽ được điền iframe hoặc placeholder tự động từ videos.js -->
+        </div>
+      </div>
+
+      <p class="text-gray-800 text-sm sm:text-base font-medium max-w-sm mx-auto pt-2 leading-relaxed">
+        Số đông học sách vở nhưng lại không hiệu quả, vậy tại sao phải chạy theo số đông?
+      </p>
+    </section>
+
+    <!-- ==================== SECTION 2: VẤN ĐỀ ==================== -->
+    <section class="space-y-3">
+      <h3 class="text-2xl sm:text-3xl font-extrabold text-center text-gray-900">
+        Vấn đề
+      </h3>
+      <div class="bg-[#F0F7FF] border border-[#E0F2FE] rounded-2xl p-6 text-center shadow-sm">
+        <h4 class="text-lg sm:text-xl font-bold text-[#0284C7] mb-2.5">
+          Học mãi không giỏi
+        </h4>
+        <p class="text-gray-700 text-sm sm:text-base leading-relaxed">
+          Học nhiều nơi nhưng chỉ bám theo giáo trình HSK, không có tư duy đột phá, không có cách học thực tế.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 3: ĐỐI TƯỢNG KHÓA HỌC ==================== -->
+    <section class="space-y-3">
+      <h3 class="text-2xl sm:text-3xl font-extrabold text-center text-gray-900 leading-tight">
+        Đối tượng<br>khóa học
+      </h3>
+      <div class="bg-[#F0F7FF] border border-[#E0F2FE] rounded-2xl p-6 text-center shadow-sm">
+        <h4 class="text-lg sm:text-xl font-bold text-[#0284C7] mb-3 leading-snug">
+          Người mới bắt đầu hoặc<br>HSK 3, 4, thậm chí 5
+        </h4>
+        <p class="text-gray-700 text-sm sm:text-base leading-relaxed">
+          Nếu em chưa giao tiếp được thì người mới hoặc học đến HSK 3, 4, thậm chí 5 đều bằng nhau, không hơn không kém. Vì thế, chỉ cần mục tiêu là giao tiếp thành thạo thì khóa này là dành cho em.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 4: GIẢI PHÁP ==================== -->
+    <section class="space-y-3">
+      <h3 class="text-2xl sm:text-3xl font-extrabold text-center text-gray-900">
+        Giải pháp
+      </h3>
+      <div class="bg-[#F0F7FF] border border-[#E0F2FE] rounded-2xl p-6 text-center shadow-sm">
+        <h4 class="text-lg sm:text-xl font-bold text-[#0284C7] mb-2.5">
+          Chỉ học những gì thực tế nhất
+        </h4>
+        <p class="text-gray-700 text-sm sm:text-base leading-relaxed">
+          Bỏ luôn cày đề, chép từ vựng và học mẹo để học nhanh trên con đường thực tế.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 5: DỨT ĐIỂM LẦN CUỐI ==================== -->
+    <section class="space-y-3">
+      <h3 class="text-2xl sm:text-3xl font-extrabold text-center text-gray-900 leading-tight">
+        Dứt điểm<br>lần cuối
+      </h3>
+      <div class="bg-[#F0F7FF] border border-[#E0F2FE] rounded-2xl p-6 text-center shadow-sm">
+        <h4 class="text-lg sm:text-xl font-bold text-[#0284C7] mb-3">
+          Không cần học nhiều khóa
+        </h4>
+        <p class="text-gray-700 text-sm sm:text-base leading-relaxed">
+          Một khóa duy nhất để nắm trọn các chủ đề thực chiến nhất mà người Trung hay dùng trong cuộc sống. Thêm nữa, các em sẽ nắm được tư duy chuẩn, quy trình bài bản và các công cụ thực dụng nhất để tự bước tiếp sau khóa mà không cần đăng kí thêm bất kì một khóa nào khác.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 6: LỚP HỌC CÓ GÌ ? ==================== -->
+    <section class="space-y-4">
+      <h3 class="text-2xl sm:text-3xl font-extrabold text-center text-gray-900">
+        Lớp học có gì ?
+      </h3>
+      
+      <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-gray-100 space-y-3.5">
+        
+        <!-- Feature 1 -->
+        <div class="border border-blue-100 rounded-2xl p-4 flex items-start gap-3 bg-white">
+          <svg class="w-5 h-5 text-blue-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+          </svg>
+          <div>
+            <h4 class="font-bold text-gray-900 text-sm sm:text-base leading-snug">
+              Tư duy, quy trình chuẩn và bộ công cụ áp dụng được luôn
+            </h4>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="border border-blue-100 rounded-2xl p-4 flex items-start gap-3 bg-white">
+          <svg class="w-5 h-5 text-blue-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+          </svg>
+          <div>
+            <h4 class="font-bold text-gray-900 text-sm sm:text-base leading-snug">
+              Trọn bộ video đi hết 15 chủ đề thực chiến
+            </h4>
+            <p class="text-gray-500 text-xs sm:text-sm mt-1">
+              Được lưu trữ trọn đời trong nhóm Facebook kín.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="border border-blue-100 rounded-2xl p-4 flex items-start gap-3 bg-white">
+          <svg class="w-5 h-5 text-blue-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+          </svg>
+          <div>
+            <h4 class="font-bold text-gray-900 text-sm sm:text-base leading-snug">
+              Định hướng tự học sau khóa học
+            </h4>
+            <p class="text-gray-500 text-xs sm:text-sm mt-1 leading-relaxed">
+              Từ giao tiếp hằng ngày đến thi chứng chỉ và áp dụng thực tế vào công việc chuyên môn.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 4: NETWORK THỰC CHIẾN (Highlight Box) -->
+        <div class="border-2 border-dashed border-[#F59E0B] bg-[#FFFDF5] rounded-2xl p-5 relative">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-lg">🔑</span>
+            <span class="bg-[#EA580C] text-white text-[11px] sm:text-xs font-bold px-3 py-1 rounded-md uppercase tracking-wider">
+              NETWORK THỰC CHIẾN
+            </span>
+          </div>
+          <p class="text-gray-800 text-sm sm:text-base leading-relaxed mt-2.5">
+            Kết bạn trực tiếp với 2 bạn người bản xứ trong nhóm Facebook kín để chủ động đồng hành, luyện tập sau khóa.
+          </p>
+          <p class="italic font-semibold text-[#B45309] text-sm sm:text-base mt-3">
+            “Không chỉ chia sẻ kiến thức, kinh nghiệm mà còn là cả mối quan hệ.”
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 7: THỜI GIAN VÀ CÁCH THỨC HỌC ==================== -->
+    <section class="space-y-4">
+      <h3 class="text-2xl sm:text-3xl font-extrabold text-center text-gray-900 leading-tight">
+        Thời gian và cách<br>thức học
+      </h3>
+
+      <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-gray-100 space-y-3.5">
+        
+        <!-- Step 1 -->
+        <div class="border border-blue-100 rounded-2xl p-4 flex items-start gap-3 bg-white">
+          <svg class="w-5 h-5 text-blue-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+          </svg>
+          <div>
+            <h4 class="font-bold text-gray-900 text-sm sm:text-base leading-snug">
+              Linh hoạt thời gian học
+            </h4>
+            <p class="text-gray-600 text-xs sm:text-sm mt-1 leading-relaxed">
+              Lộ trình gợi ý kéo dài 8–12 tuần. Em có thể linh hoạt học nhanh hoặc chậm hơn tùy quỹ thời gian.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="border border-blue-100 rounded-2xl p-4 flex items-start gap-3 bg-white">
+          <svg class="w-5 h-5 text-blue-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+          </svg>
+          <div>
+            <h4 class="font-bold text-gray-900 text-sm sm:text-base leading-snug">
+              Chữa bài tập và giải đáp mọi thắc mắc
+            </h4>
+            <p class="text-gray-600 text-xs sm:text-sm mt-1 leading-relaxed">
+              Được kèm cặp và hỗ trợ trực tiếp 1-1 từ anh Phụng.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="border border-blue-100 rounded-2xl p-4 flex items-start gap-3 bg-white">
+          <svg class="w-5 h-5 text-blue-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+          </svg>
+          <div>
+            <h4 class="font-bold text-gray-900 text-sm sm:text-base leading-snug">
+              Hỗ trợ sau khoá học
+            </h4>
+            <p class="text-gray-600 text-xs sm:text-sm mt-1 leading-relaxed">
+              Đồng hành và hỗ trợ mọi vấn đề liên quan đến tiếng Trung hoàn toàn miễn phí.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 8: HỌC VIÊN SAU 7 BUỔI ==================== -->
+    <section class="text-center space-y-4">
+      <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-900">
+        Học viên sau 7 buổi
+      </h3>
+
+      <div id="video-hocVien7Buoi" class="video-container-shorts" data-video-key="hocVien7Buoi">
+        <!-- Video 2 -->
+      </div>
+
+      <p class="text-gray-700 text-sm sm:text-base font-medium">
+        Học thử phương pháp mới, khoa học và hiệu quả
+      </p>
+    </section>
+
+    <!-- ==================== SECTION 9: HỌC THỬ ==================== -->
+    <section class="text-center space-y-4">
+      <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-900">
+        Học thử
+      </h3>
+
+      <div id="video-hocThu" class="video-container-shorts" data-video-key="hocThu">
+        <!-- Video 3 -->
+      </div>
+
+      <p class="text-gray-700 text-sm sm:text-base font-medium">
+        Học thử phương pháp mới, khoa học và hiệu quả
+      </p>
+    </section>
+
+    <!-- ==================== SECTION 10: CÔNG CỤ HỌC GIAO TIẾP ĐỘC QUYỀN ==================== -->
+    <section class="text-center space-y-4">
+      <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-900 leading-tight">
+        Công cụ học<br>giao tiếp<br>độc quyền
+      </h3>
+
+      <div id="video-congCuGiaoTiep" class="video-container-shorts" data-video-key="congCuGiaoTiep">
+        <!-- Video 4 -->
+      </div>
+
+      <p class="text-gray-700 text-sm sm:text-base font-medium">
+        còn nhiều hơn nữa được anh share trong khoá.
+      </p>
+    </section>
+
+    <!-- ==================== SECTION 11: HỌC VIÊN NÓI GÌ VỀ KHÓA ==================== -->
+    <section class="text-center space-y-6">
+      <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-900">
+        Học viên nói gì<br>về khóa
+      </h3>
+
+      <!-- Feedback Video 1 -->
+      <div class="space-y-2">
+        <p class="text-xs uppercase tracking-wider text-gray-500 font-bold">Feedback 1</p>
+        <div id="video-feedback1" class="video-container-shorts" data-video-key="feedback1">
+          <!-- Video Feedback 1 -->
+        </div>
+      </div>
+
+      <!-- Feedback Video 2 -->
+      <div class="space-y-2">
+        <p class="text-xs uppercase tracking-wider text-gray-500 font-bold">Feedback 2</p>
+        <div id="video-feedback2" class="video-container-shorts" data-video-key="feedback2">
+          <!-- Video Feedback 2 -->
+        </div>
+      </div>
+
+      <!-- Feedback Video 3 -->
+      <div class="space-y-2">
+        <p class="text-xs uppercase tracking-wider text-gray-500 font-bold">Feedback 3</p>
+        <div id="video-feedback3" class="video-container-shorts" data-video-key="feedback3">
+          <!-- Video Feedback 3 -->
+        </div>
+      </div>
+
+      <!-- Feedback Review Images Grid (4 ô trong ảnh gốc) -->
+      <div class="pt-4 space-y-3">
+        <p class="text-xs uppercase tracking-wider text-gray-500 font-bold">Cảm nhận học viên</p>
+        <div id="feedback-images-grid" class="grid grid-cols-2 gap-3">
+          <!-- Sẽ render tự động qua JS từ mảng feedbackImages trong videos.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 12: HỌC PHÍ ==================== -->
+    <section id="dangky" class="text-center space-y-3 pt-4">
+      <h3 class="text-3xl sm:text-4xl font-extrabold text-gray-900">
+        Học phí
+      </h3>
+      
+      <p class="text-gray-700 text-sm sm:text-base max-w-xs mx-auto leading-relaxed">
+        Không cần phải tốn thời gian và hàng chục triệu mà vẫn không hiệu quả
+      </p>
+
+      <div class="py-2">
+        <div class="text-2xl sm:text-3xl font-bold text-red-600 line-through tracking-wide">
+          5 triệu
+        </div>
+        <div class="text-4xl sm:text-5xl font-black text-emerald-600 tracking-tight mt-1">
+          1490K
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 13: CÁCH THỨC THAM GIA ==================== -->
+    <section class="space-y-4">
+      <h3 class="text-2xl sm:text-3xl font-extrabold text-center text-gray-900 leading-tight">
+        Cách thức<br>tham gia
+      </h3>
+
+      <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-5 text-left">
+        
+        <!-- Step 1 -->
+        <div class="space-y-2">
+          <p class="font-bold text-gray-900 text-base">
+            Bước 1: Đóng học phí
+          </p>
+          <div class="bg-gray-50 border border-gray-200 rounded-xl p-3.5 flex items-center justify-between gap-2">
+            <div class="text-xs sm:text-sm font-medium text-gray-700">
+              Nội dung chuyển khoản:<br>
+              <span id="transfer-content" class="font-mono font-bold text-blue-700 select-all text-sm sm:text-base">DK KHOA GIAO TIEP PHUNGCITEEN</span>
+            </div>
+            <button onclick="copyTransferContent()" class="shrink-0 bg-blue-50 text-blue-700 hover:bg-blue-100 text-xs font-semibold px-3 py-2 rounded-lg transition border border-blue-200 active:scale-95">
+              Sao chép
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="space-y-2">
+          <p class="font-bold text-gray-900 text-base">
+            Bước 2: Chụp ảnh gửi Zalo: <span class="text-blue-600 font-extrabold">0862459824</span>
+          </p>
+          <div class="flex gap-2">
+            <a href="https://zalo.me/0862459824" target="_blank" rel="noopener noreferrer" class="flex-1 text-center bg-[#0068FF] hover:bg-blue-700 text-white font-bold py-2.5 px-4 rounded-xl text-sm transition shadow-sm flex items-center justify-center gap-2">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.38 5.07L2 22l5.07-1.34C8.53 21.52 10.22 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/>
+              </svg>
+              Mở Zalo nhắn anh Phụng
+            </a>
+            <button onclick="copyPhone()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold px-3 rounded-xl transition border border-gray-200">
+              Copy SĐT
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div>
+          <p class="font-bold text-gray-900 text-base leading-snug">
+            Bước 3: Gửi anh link fb để anh add vô nhóm kín
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center pt-8 text-xs text-gray-400 space-y-2">
+      <p>© Minh Phụng - Học tiếng Trung thực chiến cùng anh Phungciteen</p>
+    </footer>
+
+  </main>
+
+  <!-- Sticky Bottom CTA Bar -->
+  <div class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-gray-200 py-3 px-4 shadow-lg">
+    <div class="max-w-md md:max-w-xl mx-auto flex items-center justify-between gap-4">
+      <div>
+        <div class="text-[11px] text-gray-500 font-medium line-through">Gốc 5.000.000đ</div>
+        <div class="text-xl sm:text-2xl font-black text-emerald-600 leading-tight">1490K</div>
+      </div>
+      <a href="https://zalo.me/0862459824" target="_blank" rel="noopener noreferrer" class="flex-1 bg-gray-900 hover:bg-black active:scale-95 text-white font-extrabold py-3 px-5 rounded-2xl text-center text-sm sm:text-base transition shadow-md flex items-center justify-center gap-2">
+        <span>Đăng ký ngay qua Zalo</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Toast Element -->
+  <div id="toast">Đã sao chép vào bộ nhớ tạm!</div>
+
+  <!-- Nút tiện ích sửa nhanh link video trực tiếp trên web -->
+  <button onclick="toggleQuickEditor()" title="Cài đặt link video YouTube" class="fixed right-4 bottom-20 z-40 bg-white/90 hover:bg-white text-gray-700 hover:text-black border border-gray-300 rounded-full p-2.5 shadow-md transition-all active:scale-95 flex items-center gap-1.5 text-xs font-semibold backdrop-blur-sm">
+    <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+    </svg>
+    <span class="hidden sm:inline">Điền link YouTube</span>
+  </button>
+
+  <!-- Modal nhập nhanh link video -->
+  <div id="editor-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 space-y-4 shadow-2xl">
+      <div class="flex items-center justify-between border-b pb-3">
+        <h3 class="font-extrabold text-lg text-gray-900 flex items-center gap-2">
+          <span>🎬</span> Điền link video YouTube
+        </h3>
+        <button onclick="toggleQuickEditor()" class="text-gray-400 hover:text-gray-600 text-2xl font-bold leading-none">&times;</button>
+      </div>
+      <p class="text-xs text-gray-500 leading-relaxed">
+        Bạn có thể dán link trực tiếp vào đây để xem thử ngay trên web, hoặc mở file <code class="bg-gray-100 px-1 py-0.5 rounded font-mono text-gray-800">videos.js</code> để chỉnh sửa cố định. Hỗ trợ link thường, Shorts hoặc ID video.
+      </p>
+
+      <form id="quick-links-form" class="space-y-3 text-xs sm:text-sm">
+        <div>
+          <label class="font-bold text-gray-700 block mb-1">1. Video Đầu Trang (Hero)</label>
+          <input type="text" id="input-hero" placeholder="VD: https://www.youtube.com/shorts/..." class="w-full border border-gray-300 rounded-xl px-3 py-2 text-xs font-mono focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="font-bold text-gray-700 block mb-1">2. Video Học viên sau 7 buổi</label>
+          <input type="text" id="input-hocVien7Buoi" placeholder="VD: https://www.youtube.com/shorts/..." class="w-full border border-gray-300 rounded-xl px-3 py-2 text-xs font-mono focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="font-bold text-gray-700 block mb-1">3. Video Học thử</label>
+          <input type="text" id="input-hocThu" placeholder="VD: https://www.youtube.com/watch?v=..." class="w-full border border-gray-300 rounded-xl px-3 py-2 text-xs font-mono focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="font-bold text-gray-700 block mb-1">4. Video Công cụ độc quyền</label>
+          <input type="text" id="input-congCuGiaoTiep" placeholder="VD: https://www.youtube.com/shorts/..." class="w-full border border-gray-300 rounded-xl px-3 py-2 text-xs font-mono focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="font-bold text-gray-700 block mb-1">5. Feedback 1</label>
+          <input type="text" id="input-feedback1" placeholder="Link video feedback 1" class="w-full border border-gray-300 rounded-xl px-3 py-2 text-xs font-mono focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="font-bold text-gray-700 block mb-1">6. Feedback 2</label>
+          <input type="text" id="input-feedback2" placeholder="Link video feedback 2" class="w-full border border-gray-300 rounded-xl px-3 py-2 text-xs font-mono focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="font-bold text-gray-700 block mb-1">7. Feedback 3</label>
+          <input type="text" id="input-feedback3" placeholder="Link video feedback 3" class="w-full border border-gray-300 rounded-xl px-3 py-2 text-xs font-mono focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        </div>
+
+        <div class="pt-3 flex gap-2">
+          <button type="button" onclick="applyQuickLinks()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl transition text-xs sm:text-sm">
+            Áp dụng xem ngay
+          </button>
+          <button type="button" onclick="copyConfigJS()" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold px-4 py-2.5 rounded-xl transition text-xs">
+            Copy mã videos.js
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Nạp file cấu hình video của người dùng -->
+  <script src="videos.js"></script>
+
+  <!-- Script xử lý nhúng YouTube thông minh & Tương tác -->
+  <script>
+    // Hàm trích xuất YouTube ID từ mọi loại link
+    function extractYouTubeId(urlOrId) {
+      if (!urlOrId || typeof urlOrId !== 'string') return null;
+      var trimmed = urlOrId.trim();
+      if (!trimmed) return null;
+
+      // Nếu đã là ID 11 ký tự
+      if (/^[a-zA-Z0-9_-]{11}$/.test(trimmed)) {
+        return trimmed;
+      }
+
+      // Regex hỗ trợ: youtube.com/watch?v=, youtube.com/shorts/, youtu.be/, youtube.com/embed/
+      var regExp = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?|shorts)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+      var match = trimmed.match(regExp);
+      return (match && match[1]) ? match[1] : null;
+    }
+
+    // Tạo HTML cho Video Embed hoặc Placeholder khi chưa có link
+    function renderVideoContainer(containerId, videoUrlOrId, titleHint) {
+      var container = document.getElementById(containerId);
+      if (!container) return;
+
+      var youtubeId = extractYouTubeId(videoUrlOrId);
+
+      if (youtubeId) {
+        // Nhúng iframe YouTube chuẩn responsive
+        container.innerHTML = `
+          <iframe 
+            class="video-iframe"
+            src="https://www.youtube-nocookie.com/embed/${youtubeId}?rel=0&modestbranding=1&playsinline=1"
+            title="${titleHint || 'Video'}"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        `;
+      } else {
+        // Khung chờ khi chưa điền link
+        container.innerHTML = `
+          <div class="w-full h-full bg-gradient-to-b from-gray-900 to-gray-950 flex flex-col items-center justify-center p-6 text-center text-white cursor-pointer group" onclick="toggleQuickEditor()">
+            <div class="w-16 h-16 rounded-2xl bg-red-600/90 group-hover:bg-red-600 group-hover:scale-110 flex items-center justify-center transition shadow-lg mb-3">
+              <svg class="w-8 h-8 text-white fill-current ml-1" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+            <p class="font-bold text-sm text-gray-200">${titleHint || 'Video'}</p>
+            <p class="text-xs text-gray-400 mt-1 max-w-[200px]">Nhấn vào đây để điền link YouTube</p>
+          </div>
+        `;
+      }
+    }
+
+    // Render 4 ô feedback hình ảnh
+    function renderFeedbackImages(images) {
+      var grid = document.getElementById('feedback-images-grid');
+      if (!grid) return;
+
+      var html = '';
+      for (var i = 0; i < 4; i++) {
+        var imgUrl = (images && images[i]) ? images[i].trim() : '';
+        if (imgUrl) {
+          html += `
+            <div class="aspect-[3/4] bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+              <img src="${imgUrl}" alt="Feedback ${i+1}" class="w-full h-full object-cover">
+            </div>
+          `;
+        } else {
+          html += `
+            <div class="aspect-[3/4] bg-white rounded-2xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center p-3 text-center text-gray-400 hover:border-gray-300 transition">
+              <svg class="w-8 h-8 text-gray-300 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              <span class="text-[11px] font-medium text-gray-400">Ảnh cảm nhận ${i+1}</span>
+            </div>
+          `;
+        }
+      }
+      grid.innerHTML = html;
+    }
+
+    // Khởi tạo các video từ file VIDEO_CONFIG
+    function initVideos() {
+      var cfg = (typeof VIDEO_CONFIG !== 'undefined') ? VIDEO_CONFIG : {};
+
+      renderVideoContainer('video-hero', cfg.hero, 'Tư duy tiên quyết để bắt đầu');
+      renderVideoContainer('video-hocVien7Buoi', cfg.hocVien7Buoi, 'Học viên sau 7 buổi');
+      renderVideoContainer('video-hocThu', cfg.hocThu, 'Học thử quy trình');
+      renderVideoContainer('video-congCuGiaoTiep', cfg.congCuGiaoTiep, 'Công cụ học giao tiếp độc quyền');
+      renderVideoContainer('video-feedback1', cfg.feedback1, 'Feedback 1');
+      renderVideoContainer('video-feedback2', cfg.feedback2, 'Feedback 2');
+      renderVideoContainer('video-feedback3', cfg.feedback3, 'Feedback 3');
+
+      renderFeedbackImages(cfg.feedbackImages);
+
+      // Điền sẵn vào form modal nếu có
+      if (document.getElementById('input-hero')) {
+        document.getElementById('input-hero').value = cfg.hero || '';
+        document.getElementById('input-hocVien7Buoi').value = cfg.hocVien7Buoi || '';
+        document.getElementById('input-hocThu').value = cfg.hocThu || '';
+        document.getElementById('input-congCuGiaoTiep').value = cfg.congCuGiaoTiep || '';
+        document.getElementById('input-feedback1').value = cfg.feedback1 || '';
+        document.getElementById('input-feedback2').value = cfg.feedback2 || '';
+        document.getElementById('input-feedback3').value = cfg.feedback3 || '';
+      }
+    }
+
+    // Bật/tắt modal nhập link
+    function toggleQuickEditor() {
+      var modal = document.getElementById('editor-modal');
+      modal.classList.toggle('hidden');
+    }
+
+    // Áp dụng link từ modal
+    function applyQuickLinks() {
+      if (typeof VIDEO_CONFIG === 'undefined') window.VIDEO_CONFIG = {};
+      VIDEO_CONFIG.hero = document.getElementById('input-hero').value.trim();
+      VIDEO_CONFIG.hocVien7Buoi = document.getElementById('input-hocVien7Buoi').value.trim();
+      VIDEO_CONFIG.hocThu = document.getElementById('input-hocThu').value.trim();
+      VIDEO_CONFIG.congCuGiaoTiep = document.getElementById('input-congCuGiaoTiep').value.trim();
+      VIDEO_CONFIG.feedback1 = document.getElementById('input-feedback1').value.trim();
+      VIDEO_CONFIG.feedback2 = document.getElementById('input-feedback2').value.trim();
+      VIDEO_CONFIG.feedback3 = document.getElementById('input-feedback3').value.trim();
+
+      initVideos();
+      toggleQuickEditor();
+      showToast('Đã cập nhật video hiển thị trên trang!');
+    }
+
+    // Tạo nội dung file videos.js để copy
+    function copyConfigJS() {
+      var h = document.getElementById('input-hero').value.trim();
+      var h7 = document.getElementById('input-hocVien7Buoi').value.trim();
+      var ht = document.getElementById('input-hocThu').value.trim();
+      var cc = document.getElementById('input-congCuGiaoTiep').value.trim();
+      var f1 = document.getElementById('input-feedback1').value.trim();
+      var f2 = document.getElementById('input-feedback2').value.trim();
+      var f3 = document.getElementById('input-feedback3').value.trim();
+
+      var code = `const VIDEO_CONFIG = {
+  hero: "${h}",
+  hocVien7Buoi: "${h7}",
+  hocThu: "${ht}",
+  congCuGiaoTiep: "${cc}",
+  feedback1: "${f1}",
+  feedback2: "${f2}",
+  feedback3: "${f3}",
+  feedbackImages: ["", "", "", ""],
+  contact: {
+    zaloPhone: "0862459824",
+    transferContent: "DK KHOA GIAO TIEP PHUNGCITEEN"
+  }
+};`;
+
+      navigator.clipboard.writeText(code).then(function() {
+        showToast('Đã copy mã cấu hình! Bạn có thể dán vào file videos.js');
+      });
+    }
+
+    // Hàm copy nội dung chuyển khoản
+    function copyTransferContent() {
+      var text = document.getElementById('transfer-content').innerText.trim();
+      navigator.clipboard.writeText(text).then(function() {
+        showToast('Đã sao chép nội dung chuyển khoản!');
+      }).catch(function() {
+        fallbackCopy(text);
+      });
+    }
+
+    // Hàm copy số điện thoại Zalo
+    function copyPhone() {
+      navigator.clipboard.writeText('0862459824').then(function() {
+        showToast('Đã sao chép số Zalo: 0862459824');
+      }).catch(function() {
+        fallbackCopy('0862459824');
+      });
+    }
+
+    function fallbackCopy(text) {
+      var tempInput = document.createElement("input");
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+      showToast('Đã sao chép: ' + text);
+    }
+
+    function showToast(msg) {
+      var toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.className = "show";
+      setTimeout(function() {
+        toast.className = toast.className.replace("show", "");
+      }, 3000);
+    }
+
+    // Chạy khi trang tải xong
+    document.addEventListener('DOMContentLoaded', initVideos);
+  </script>
+</body>
+</html>
