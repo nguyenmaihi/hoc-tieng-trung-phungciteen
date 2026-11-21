@@ -513,80 +513,23 @@
   <!-- Toast Element -->
   <div id="toast">Đã sao chép vào bộ nhớ tạm!</div>
 
-  <!-- Nút tiện ích sửa nhanh link video trực tiếp trên web -->
-  <button onclick="toggleQuickEditor()" title="Cài đặt link video YouTube" class="fixed right-4 bottom-20 z-40 bg-white/90 hover:bg-white text-gray-700 hover:text-black border border-gray-300 rounded-full p-2.5 shadow-md transition-all active:scale-95 flex items-center gap-1.5 text-xs font-semibold backdrop-blur-sm">
-    <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-    </svg>
-    <span class="hidden sm:inline">Điền link YouTube</span>
-  </button>
-
-  <!-- Modal nhập nhanh link video -->
-  <div id="editor-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 space-y-4 shadow-2xl">
-      <div class="flex items-center justify-between border-b pb-3">
-        <h3 class="font-extrabold text-lg text-gray-900 flex items-center gap-2">
-          <span>🎬</span> Điền link video YouTube
-        </h3>
-        <button onclick="toggleQuickEditor()" class="text-gray-400 hover:text-gray-600 text-2xl font-bold leading-none">&times;</button>
-      </div>
-      <p class="text-xs text-gray-500 leading-relaxed">
-        Bạn có thể dán link trực tiếp vào đây để xem thử ngay trên web, hoặc mở file <code class="bg-gray-100 px-1 py-0.5 rounded font-mono text-gray-800">videos.js</code> để chỉnh sửa cố định. Hỗ trợ link thường, Shorts hoặc ID video.
-      </p>
-
-      <form id="quick-links-form" class="space-y-3 text-xs sm:text-sm">
-        <div>
-          <label class="font-bold text-gray-700 block mb-1">1. Video Đầu Trang (Hero)</label>
-          <input type="text" id="input-hero" placeholder="VD: https://www.youtube.com/shorts/..." class="w-full border border-gray-300 rounded-xl px-3 py-2 text-xs font-mono focus:ring-2 focus:ring-blue-500 focus:outline-none">
-        </div>
-
-        <div>
-          <label class="font-bold text-gray-700 block mb-1">2. Video Học viên sau 7 buổi</label>
-          <input type="text" id="input-hocVien7Buoi" placeholder="VD: https://www.youtube.com/shorts/..." class="w-full border border-gray-300 rounded-xl px-3 py-2 text-xs font-mono focus:ring-2 focus:ring-blue-500 focus:outline-none">
-        </div>
-
-        <div>
-          <label class="font-bold text-gray-700 block mb-1">3. Video Học thử</label>
-          <input type="text" id="input-hocThu" placeholder="VD: https://www.youtube.com/watch?v=..." class="w-full border border-gray-300 rounded-xl px-3 py-2 text-xs font-mono focus:ring-2 focus:ring-blue-500 focus:outline-none">
-        </div>
-
-        <div>
-          <label class="font-bold text-gray-700 block mb-1">4. Video Công cụ độc quyền</label>
-          <input type="text" id="input-congCuGiaoTiep" placeholder="VD: https://www.youtube.com/shorts/..." class="w-full border border-gray-300 rounded-xl px-3 py-2 text-xs font-mono focus:ring-2 focus:ring-blue-500 focus:outline-none">
-        </div>
-
-        <div>
-          <label class="font-bold text-gray-700 block mb-1">5. Feedback 1</label>
-          <input type="text" id="input-feedback1" placeholder="Link video feedback 1" class="w-full border border-gray-300 rounded-xl px-3 py-2 text-xs font-mono focus:ring-2 focus:ring-blue-500 focus:outline-none">
-        </div>
-
-        <div>
-          <label class="font-bold text-gray-700 block mb-1">6. Feedback 2</label>
-          <input type="text" id="input-feedback2" placeholder="Link video feedback 2" class="w-full border border-gray-300 rounded-xl px-3 py-2 text-xs font-mono focus:ring-2 focus:ring-blue-500 focus:outline-none">
-        </div>
-
-        <div>
-          <label class="font-bold text-gray-700 block mb-1">7. Feedback 3</label>
-          <input type="text" id="input-feedback3" placeholder="Link video feedback 3" class="w-full border border-gray-300 rounded-xl px-3 py-2 text-xs font-mono focus:ring-2 focus:ring-blue-500 focus:outline-none">
-        </div>
-
-        <div class="pt-3 flex gap-2">
-          <button type="button" onclick="applyQuickLinks()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl transition text-xs sm:text-sm">
-            Áp dụng xem ngay
-          </button>
-          <button type="button" onclick="copyConfigJS()" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold px-4 py-2.5 rounded-xl transition text-xs">
-            Copy mã videos.js
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
   <!-- Nạp file cấu hình video của người dùng -->
   <script src="videos.js"></script>
 
   <!-- Script xử lý nhúng YouTube thông minh & Tương tác -->
   <script>
+    // Cấu hình video mặc định
+    var DEFAULT_CONFIG = {
+      hero: "https://youtube.com/shorts/K6kosOPxYZg?si=BCx2WoqcNZyWsgCv",
+      hocVien7Buoi: "https://youtube.com/shorts/YhvHOTFVdME?si=H_fWMcw670wJrDhh",
+      hocThu: "https://youtu.be/P4p2L8-LUCA?si=Pr4zhgPuJgcN3MYh",
+      congCuGiaoTiep: "https://youtube.com/shorts/qD7hBxf7qeg?si=gwy2sKLyCh32yZpA",
+      feedback1: "https://youtube.com/shorts/nv1Craqe7bg?si=MB4VPv8LkGmCt0I9",
+      feedback2: "https://youtube.com/shorts/L8G6he2KAS0?si=3_RgWR1HvxnYj_bk",
+      feedback3: "https://youtube.com/shorts/uAjiEPDXOG0?si=o_rwHxwpKdW0-Smq",
+      feedbackImages: ["fb1.jpg", "fb2.jpg", "fb3.jpg", "fb4.jpg"]
+    };
+
     // Hàm trích xuất YouTube ID từ mọi loại link
     function extractYouTubeId(urlOrId) {
       if (!urlOrId || typeof urlOrId !== 'string') return null;
@@ -616,24 +559,23 @@
         container.innerHTML = `
           <iframe 
             class="video-iframe"
-            src="https://www.youtube-nocookie.com/embed/${youtubeId}?rel=0&modestbranding=1&playsinline=1"
+            src="https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1&playsinline=1"
             title="${titleHint || 'Video'}"
+            frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-            loading="lazy">
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen>
           </iframe>
         `;
       } else {
-        // Khung chờ khi chưa điền link
         container.innerHTML = `
-          <div class="w-full h-full bg-gradient-to-b from-gray-900 to-gray-950 flex flex-col items-center justify-center p-6 text-center text-white cursor-pointer group" onclick="toggleQuickEditor()">
-            <div class="w-16 h-16 rounded-2xl bg-red-600/90 group-hover:bg-red-600 group-hover:scale-110 flex items-center justify-center transition shadow-lg mb-3">
+          <div class="w-full h-full bg-gradient-to-b from-gray-900 to-gray-950 flex flex-col items-center justify-center p-6 text-center text-white">
+            <div class="w-16 h-16 rounded-2xl bg-red-600 flex items-center justify-center shadow-lg mb-3">
               <svg class="w-8 h-8 text-white fill-current ml-1" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z"/>
               </svg>
             </div>
             <p class="font-bold text-sm text-gray-200">${titleHint || 'Video'}</p>
-            <p class="text-xs text-gray-400 mt-1 max-w-[200px]">Nhấn vào đây để điền link YouTube</p>
           </div>
         `;
       }
@@ -670,9 +612,9 @@
       grid.innerHTML = html;
     }
 
-    // Khởi tạo các video từ file VIDEO_CONFIG
+    // Khởi tạo các video từ file VIDEO_CONFIG hoặc DEFAULT_CONFIG
     function initVideos() {
-      var cfg = (typeof VIDEO_CONFIG !== 'undefined') ? VIDEO_CONFIG : {};
+      var cfg = (typeof VIDEO_CONFIG !== 'undefined' && VIDEO_CONFIG && VIDEO_CONFIG.hero) ? VIDEO_CONFIG : DEFAULT_CONFIG;
 
       renderVideoContainer('video-hero', cfg.hero, 'Tư duy tiên quyết để bắt đầu');
       renderVideoContainer('video-hocVien7Buoi', cfg.hocVien7Buoi, 'Học viên sau 7 buổi');
@@ -683,69 +625,6 @@
       renderVideoContainer('video-feedback3', cfg.feedback3, 'Feedback 3');
 
       renderFeedbackImages(cfg.feedbackImages);
-
-      // Điền sẵn vào form modal nếu có
-      if (document.getElementById('input-hero')) {
-        document.getElementById('input-hero').value = cfg.hero || '';
-        document.getElementById('input-hocVien7Buoi').value = cfg.hocVien7Buoi || '';
-        document.getElementById('input-hocThu').value = cfg.hocThu || '';
-        document.getElementById('input-congCuGiaoTiep').value = cfg.congCuGiaoTiep || '';
-        document.getElementById('input-feedback1').value = cfg.feedback1 || '';
-        document.getElementById('input-feedback2').value = cfg.feedback2 || '';
-        document.getElementById('input-feedback3').value = cfg.feedback3 || '';
-      }
-    }
-
-    // Bật/tắt modal nhập link
-    function toggleQuickEditor() {
-      var modal = document.getElementById('editor-modal');
-      modal.classList.toggle('hidden');
-    }
-
-    // Áp dụng link từ modal
-    function applyQuickLinks() {
-      if (typeof VIDEO_CONFIG === 'undefined') window.VIDEO_CONFIG = {};
-      VIDEO_CONFIG.hero = document.getElementById('input-hero').value.trim();
-      VIDEO_CONFIG.hocVien7Buoi = document.getElementById('input-hocVien7Buoi').value.trim();
-      VIDEO_CONFIG.hocThu = document.getElementById('input-hocThu').value.trim();
-      VIDEO_CONFIG.congCuGiaoTiep = document.getElementById('input-congCuGiaoTiep').value.trim();
-      VIDEO_CONFIG.feedback1 = document.getElementById('input-feedback1').value.trim();
-      VIDEO_CONFIG.feedback2 = document.getElementById('input-feedback2').value.trim();
-      VIDEO_CONFIG.feedback3 = document.getElementById('input-feedback3').value.trim();
-
-      initVideos();
-      toggleQuickEditor();
-      showToast('Đã cập nhật video hiển thị trên trang!');
-    }
-
-    // Tạo nội dung file videos.js để copy
-    function copyConfigJS() {
-      var h = document.getElementById('input-hero').value.trim();
-      var h7 = document.getElementById('input-hocVien7Buoi').value.trim();
-      var ht = document.getElementById('input-hocThu').value.trim();
-      var cc = document.getElementById('input-congCuGiaoTiep').value.trim();
-      var f1 = document.getElementById('input-feedback1').value.trim();
-      var f2 = document.getElementById('input-feedback2').value.trim();
-      var f3 = document.getElementById('input-feedback3').value.trim();
-
-      var code = `const VIDEO_CONFIG = {
-  hero: "${h}",
-  hocVien7Buoi: "${h7}",
-  hocThu: "${ht}",
-  congCuGiaoTiep: "${cc}",
-  feedback1: "${f1}",
-  feedback2: "${f2}",
-  feedback3: "${f3}",
-  feedbackImages: ["", "", "", ""],
-  contact: {
-    zaloPhone: "0862459824",
-    transferContent: "DK KHOA GIAO TIEP PHUNGCITEEN"
-  }
-};`;
-
-      navigator.clipboard.writeText(code).then(function() {
-        showToast('Đã copy mã cấu hình! Bạn có thể dán vào file videos.js');
-      });
     }
 
     // Hàm copy nội dung chuyển khoản
