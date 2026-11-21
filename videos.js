@@ -6,6 +6,10 @@ const VIDEO_CONFIG = {
   feedback1: "https://youtube.com/shorts/nv1Craqe7bg?si=MB4VPv8LkGmCt0I9",
   feedback2: "https://youtube.com/shorts/L8G6he2KAS0?si=3_RgWR1HvxnYj_bk",
   feedback3: "https://youtube.com/shorts/uAjiEPDXOG0?si=o_rwHxwpKdW0-Smq",
+  
+  // 8. Video bổ sung sau phần feedback (dán link YouTube vào đây khi bạn muốn thêm)
+  extraVideo: "https://youtube.com/shorts/m6_TWA4H-7I",
+
   feedbackImages: [
     "fb1.jpg",
     "fb2.jpg",

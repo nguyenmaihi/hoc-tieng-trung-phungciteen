@@ -115,11 +115,8 @@
     <div class="max-w-md md:max-w-xl mx-auto flex items-center justify-between">
       <div class="flex items-center space-x-2">
         <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-        <h1 class="text-sm font-bold tracking-tight text-gray-800">Học tiếng Trung cùng anh Phungciteen</h1>
+        <h1 class="text-sm font-bold tracking-tight text-gray-800">Học cùng anh Phụng, học để dùng</h1>
       </div>
-      <a href="#dangky" class="text-xs font-semibold bg-gray-900 text-white px-3 py-1.5 rounded-full hover:bg-gray-800 transition">
-        Học phí 1490K
-      </a>
     </div>
   </header>
 
@@ -406,6 +403,14 @@
         </div>
       </div>
 
+      <!-- Video bổ sung sau Feedback (Tự động hiển thị khi bạn điền link vào extraVideo trong videos.js) -->
+      <div id="container-extraVideo" class="pt-6 space-y-3">
+        <p class="text-xs uppercase tracking-wider text-gray-500 font-bold">Video chia sẻ thêm</p>
+        <div id="video-extraVideo" class="video-container-shorts" data-video-key="extraVideo">
+          <!-- Video bổ sung -->
+        </div>
+      </div>
+
       <!-- Feedback Review Images Grid (4 ô trong ảnh gốc) -->
       <div class="pt-4 space-y-3">
         <p class="text-xs uppercase tracking-wider text-gray-500 font-bold">Cảm nhận học viên</p>
@@ -443,19 +448,51 @@
 
       <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-5 text-left">
         
-        <!-- Step 1 -->
-        <div class="space-y-2">
+        <!-- Step 1: Quét mã QR & Chuyển khoản -->
+        <div class="space-y-3">
           <p class="font-bold text-gray-900 text-base">
-            Bước 1: Đóng học phí
+            Bước 1: Quét mã QR hoặc chuyển khoản học phí
           </p>
-          <div class="bg-gray-50 border border-gray-200 rounded-xl p-3.5 flex items-center justify-between gap-2">
-            <div class="text-xs sm:text-sm font-medium text-gray-700">
-              Nội dung chuyển khoản:<br>
-              <span id="transfer-content" class="font-mono font-bold text-blue-700 select-all text-sm sm:text-base">DK KHOA GIAO TIEP PHUNGCITEEN</span>
+
+          <!-- Khung QR Code & Chi tiết tài khoản -->
+          <div class="bg-gradient-to-b from-blue-50/60 to-white border border-blue-100 rounded-2xl p-4 sm:p-5 text-center shadow-sm space-y-4">
+            
+            <!-- Ảnh QR TPBank -->
+            <div class="max-w-[220px] mx-auto bg-white p-2.5 rounded-2xl border border-gray-200 shadow-sm cursor-pointer group" onclick="openLightbox('qr.jpg')">
+              <img src="qr.jpg" alt="Mã QR thanh toán học phí TPBank" class="w-full h-auto rounded-xl object-contain group-hover:scale-[1.02] transition">
+              <span class="text-[11px] text-gray-400 mt-1.5 block">🔍 Bấm vào để phóng to mã QR</span>
             </div>
-            <button onclick="copyTransferContent()" class="shrink-0 bg-blue-50 text-blue-700 hover:bg-blue-100 text-xs font-semibold px-3 py-2 rounded-lg transition border border-blue-200 active:scale-95">
-              Sao chép
-            </button>
+
+            <!-- Bảng chi tiết chuyển khoản -->
+            <div class="bg-white border border-gray-200 rounded-xl p-3.5 text-xs sm:text-sm text-left space-y-2.5 shadow-xs">
+              <div class="flex justify-between items-center pb-2 border-b border-gray-100">
+                <span class="text-gray-500 font-medium">Ngân hàng:</span>
+                <span class="font-bold text-gray-900">TPBank</span>
+              </div>
+              <div class="flex justify-between items-center pb-2 border-b border-gray-100">
+                <span class="text-gray-500 font-medium">Chủ tài khoản:</span>
+                <span class="font-bold text-gray-900">NGUYEN MINH PHUNG</span>
+              </div>
+              <div class="flex justify-between items-center pb-2 border-b border-gray-100">
+                <span class="text-gray-500 font-medium">Số tài khoản:</span>
+                <div class="flex items-center gap-1.5">
+                  <span id="stk-number" class="font-mono font-black text-blue-700 text-sm sm:text-base">1000 4605 589</span>
+                  <button onclick="copySTK()" class="bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-semibold px-2.5 py-1 rounded-lg transition border border-blue-200 active:scale-95">Copy STK</button>
+                </div>
+              </div>
+              <div class="flex justify-between items-center pb-2 border-b border-gray-100">
+                <span class="text-gray-500 font-medium">Số tiền:</span>
+                <span class="font-black text-emerald-600 text-sm sm:text-base">1.490.000 VNĐ</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-gray-500 font-medium">Nội dung CK:</span>
+                <div class="flex items-center gap-1.5">
+                  <span id="transfer-content" class="font-mono font-bold text-blue-700 text-xs sm:text-sm select-all">DK KHOA GIAO TIEP PHUNGCITEEN</span>
+                  <button onclick="copyTransferContent()" class="bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-semibold px-2.5 py-1 rounded-lg transition border border-blue-200 active:scale-95">Copy</button>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -501,11 +538,8 @@
         <div class="text-[11px] text-gray-500 font-medium line-through">Gốc 5.000.000đ</div>
         <div class="text-xl sm:text-2xl font-black text-emerald-600 leading-tight">1490K</div>
       </div>
-      <a href="https://zalo.me/0862459824" target="_blank" rel="noopener noreferrer" class="flex-1 bg-gray-900 hover:bg-black active:scale-95 text-white font-extrabold py-3 px-5 rounded-2xl text-center text-sm sm:text-base transition shadow-md flex items-center justify-center gap-2">
-        <span>Đăng ký ngay qua Zalo</span>
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
-        </svg>
+      <a href="#dangky" class="flex-1 bg-gray-900 hover:bg-black active:scale-95 text-white font-extrabold py-3 px-5 rounded-2xl text-center text-sm sm:text-base transition shadow-md flex items-center justify-center gap-2">
+        Đăng ký ngay
       </a>
     </div>
   </div>
@@ -527,6 +561,7 @@
       feedback1: "https://youtube.com/shorts/nv1Craqe7bg?si=MB4VPv8LkGmCt0I9",
       feedback2: "https://youtube.com/shorts/L8G6he2KAS0?si=3_RgWR1HvxnYj_bk",
       feedback3: "https://youtube.com/shorts/uAjiEPDXOG0?si=o_rwHxwpKdW0-Smq",
+      extraVideo: "",
       feedbackImages: ["fb1.jpg", "fb2.jpg", "fb3.jpg", "fb4.jpg"]
     };
 
@@ -623,8 +658,18 @@
       renderVideoContainer('video-feedback1', cfg.feedback1, 'Feedback 1');
       renderVideoContainer('video-feedback2', cfg.feedback2, 'Feedback 2');
       renderVideoContainer('video-feedback3', cfg.feedback3, 'Feedback 3');
+      renderVideoContainer('video-extraVideo', cfg.extraVideo, 'Video chia sẻ thêm');
 
       renderFeedbackImages(cfg.feedbackImages);
+    }
+
+    // Hàm copy số tài khoản TPBank
+    function copySTK() {
+      navigator.clipboard.writeText('10004605589').then(function() {
+        showToast('Đã sao chép STK: 1000 4605 589');
+      }).catch(function() {
+        fallbackCopy('10004605589');
+      });
     }
 
     // Hàm copy nội dung chuyển khoản
