@@ -649,8 +649,11 @@
         var imgUrl = (images && images[i]) ? images[i].trim() : '';
         if (imgUrl) {
           html += `
-            <div class="aspect-[3/4] bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
-              <img src="${imgUrl}" alt="Feedback ${i+1}" class="w-full h-full object-cover">
+            <div class="aspect-[3/4] bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm cursor-pointer group relative" onclick="openLightbox('${imgUrl}')">
+              <img src="${imgUrl}" alt="Feedback ${i+1}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+              <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                <span class="bg-black/75 text-white text-[11px] font-semibold px-2.5 py-1 rounded-full backdrop-blur-sm">🔍 Xem to</span>
+              </div>
             </div>
           `;
         } else {
@@ -783,8 +786,30 @@
       }, 3000);
     }
 
+    // Lightbox xem ảnh to
+    function openLightbox(src) {
+      var modal = document.getElementById('lightbox-modal');
+      var img = document.getElementById('lightbox-img');
+      img.src = src;
+      modal.classList.remove('hidden');
+    }
+
+    function closeLightbox() {
+      var modal = document.getElementById('lightbox-modal');
+      modal.classList.add('hidden');
+    }
+
     // Chạy khi trang tải xong
     document.addEventListener('DOMContentLoaded', initVideos);
   </script>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden" onclick="closeLightbox()">
+    <div class="relative max-w-sm sm:max-w-md w-full max-h-[92vh] flex flex-col items-center" onclick="event.stopPropagation()">
+      <button onclick="closeLightbox()" class="absolute -top-10 right-0 text-white hover:text-gray-300 text-3xl font-bold leading-none">&times;</button>
+      <img id="lightbox-img" src="" alt="Feedback phóng to" class="rounded-2xl max-h-[85vh] w-auto object-contain shadow-2xl border border-white/10">
+      <p class="text-white/70 text-xs mt-3 text-center">Bấm ra ngoài hoặc nút X để đóng</p>
+    </div>
+  </div>
 </body>
 </html>
