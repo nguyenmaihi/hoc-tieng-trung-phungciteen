@@ -1,7 +1,7 @@
 const VIDEO_CONFIG = {
   hero: "https://youtube.com/shorts/K6kosOPxYZg?si=BCx2WoqcNZyWsgCv",
   hocVien7Buoi: "https://youtube.com/shorts/YhvHOTFVdME?si=H_fWMcw670wJrDhh",
-  hocThu: "https://youtu.be/P4p2L8-LUCA?si=Pr4zhgPuJgcN3MYh",
+  hocThu: "https://www.youtube.com/watch?v=TYXkE0SeW3I",
   congCuGiaoTiep: "https://youtube.com/shorts/qD7hBxf7qeg?si=gwy2sKLyCh32yZpA",
   feedback1: "https://youtube.com/shorts/nv1Craqe7bg?si=MB4VPv8LkGmCt0I9",
   feedback2: "https://youtube.com/shorts/L8G6he2KAS0?si=3_RgWR1HvxnYj_bk",
